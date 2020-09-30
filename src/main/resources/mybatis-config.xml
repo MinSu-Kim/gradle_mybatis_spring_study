@@ -4,4 +4,7 @@
 	<typeAliases>
 		<package name="gradle_mybatis_spring_study.dto"/>
 	</typeAliases>
+	<typeHandlers>
+	   <package name="gradle_mybatis_spring_study.typehandlers"/>
+	</typeHandlers>
 </configuration>
