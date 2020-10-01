@@ -1,5 +1,7 @@
 package gradle_mybatis_spring_study.mapper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -39,7 +41,6 @@ public class CourseMapperTest {
     public void test01SelectCoursesByCondition() {
         log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-        GregorianCalendar cal = new GregorianCalendar(2013, 1, 1);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("tutorId", 1);
            
@@ -52,7 +53,6 @@ public class CourseMapperTest {
     public void test02SelectCoursesByCondition() {
         log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
-        GregorianCalendar cal = new GregorianCalendar(2013, 1, 1);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("courseName", "%Java%");
            
@@ -112,6 +112,74 @@ public class CourseMapperTest {
         map.put("endDate", new Date());
         list = mapper.selectWhereCourses(map);
         list.stream().forEach(System.out::println);      
+    }
+
+    @Test
+    public void test06SelectTrimCourses() {
+        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+    
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<Course> list = mapper.selectTrimCourses(map);
+        Assert.assertNotNull(list);
+        list.stream().forEach(System.out::println);      
+            
+        map.put("tutorId", 1); 
+        list = mapper.selectTrimCourses(map);
+        Assert.assertNotNull(list);
+        list.stream().forEach(System.out::println);
+        
+        map.clear();
+        map.put("courseName", "%java%");
+        list = mapper.selectTrimCourses(map);
+        Assert.assertNotNull(list);
+        list.stream().forEach(System.out::println);
+        
+        map.clear();
+        map.put("tutorId", 1);
+        list = mapper.selectTrimCourses(map);
+        Assert.assertNotNull(list);
+        list.stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void test07SelectCoursesForeachByTutors() {
+        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+    
+        List<Integer> tutorIds = new ArrayList<Integer>();
+        tutorIds.add(1);
+        tutorIds.add(2);
+            
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("tutorIds", tutorIds);
+            
+        List<Course> list = mapper.selectCoursesForeachByTutors(map);
+        Assert.assertNotNull(list);
+        list.stream().forEach(System.out::println);
+    }
+    
+    @Test
+    public void test08insertCourses() {
+        List<Course> tutors = new ArrayList<Course>();
+        tutors.add(new Course(4, "mysql", "database", new Date(), new Date(), 3));
+        tutors.add(new Course(5, "mssql", "database", new Date(), new Date(), 3));
+        tutors.add(new Course(6, "mariaDb", "database", new Date(), new Date(), 4));
+            
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("tutors", tutors);
+            
+        int res = mapper.insertCourses(map);
+        Assert.assertEquals(3, res);
+    }
+
+    @Test
+    public void test09DeleteCourses() {
+        List<Integer> courseIds = Arrays.asList(4, 5, 6);
+            
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("courseIds", courseIds);
+            
+        int res = mapper.deleteCourses(map);
+        Assert.assertEquals(3, res);
     }
 
 }
