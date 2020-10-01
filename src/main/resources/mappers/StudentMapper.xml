@@ -85,5 +85,44 @@
     <select id="selectStudentByAllForHashMap" resultType="map">
         <include refid="selectSQL"/>
     </select>
+
+<!--  
+       일대일 결과 매핑
+       -> 주소 결과를 다른 select 매핑 구문에서 Address 객체에 매핑할 필요가 있다면, 
+                  각각의 구문에서 사용할 매핑을 반복적으로 설정(중복)
+    <resultMap id="StudentWithAddressResult2" type="Student">
+        <id property="studId" column="stud_id" />
+        <result property="name" column="name" />
+        <result property="email" column="email" />
+        <result property="phone" column="phone" />
+        <result property="dob" column="dob" />
+        <result property="address.addrId" column="addr_id" />
+        <result property="address.street" column="street" />
+        <result property="address.city" column="city" />
+        <result property="address.state" column="state" />
+        <result property="address.zip" column="zip" />
+        <result property="address.country" column="country" />
+    </resultMap>
+
+    <resultMap id="StudentWithAddressResult" type="Student" extends="StudentResult">
+        <result property="address.addrId" column="addr_id" />
+        <result property="address.street" column="street" />
+        <result property="address.city" column="city" />
+        <result property="address.state" column="state" />
+        <result property="address.zip" column="zip" />
+        <result property="address.country" column="country" />
+    </resultMap>
+-->    
+
+   <!-- 내포된 결과매핑(ResultMap)을 사용한 일대일 매핑 -->
+   <resultMap id="StudentAssociation" type="Student" extends="StudentResult">
+     <association property="address" resultMap="gradle_mybatis_spring_study.mapper.AddressMapper.AddressResult"/>
+   </resultMap>
     
+   <select id="selectStudentByNoAssociation" parameterType="Student" resultMap="StudentAssociation">
+     select stud_id, name, email, phone, dob, a.addr_id, street, city, state, zip, country
+       from students s join addresses a on s.addr_id=a.addr_id
+      where stud_id = #{studId} 
+   </select>
+
 </mapper>

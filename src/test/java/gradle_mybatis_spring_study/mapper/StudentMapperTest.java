@@ -32,7 +32,7 @@ public class StudentMapperTest {
 	private StudentMapper mapper;
 	
 	@Test
-	public void test1SelectStudentByNo() {
+	public void test01SelectStudentByNo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
         Student student = new Student();
@@ -43,7 +43,7 @@ public class StudentMapperTest {
 	}
 
 	@Test
-	public void test2SelectStudentByNoWithResultMap() {
+	public void test02SelectStudentByNoWithResultMap() {
 	    log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
         Student student = new Student();
@@ -54,7 +54,7 @@ public class StudentMapperTest {
 	} 
 	
 	@Test 
-	public void test3SelectStudentByAll() {
+	public void test03SelectStudentByAll() {
 	    log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 	    List<Student> list = mapper.selectStudentByAll();
 	    Assert.assertNotNull(list); 
@@ -62,7 +62,7 @@ public class StudentMapperTest {
 	}
 	
 	@Test
-	public void test4InsertStudent() {
+	public void test04InsertStudent() {
 	    Calendar newDate = GregorianCalendar.getInstance();
 	    newDate.set(1990, 2, 28);
 
@@ -77,14 +77,14 @@ public class StudentMapperTest {
 	}
 
 	@Test
-	public void test5DeleteStudent(){
+	public void test05DeleteStudent(){
 	    log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 	    int deleteStudent = mapper.deleteStudent(3);
 	    Assert.assertSame(1, deleteStudent);
 	}
 
 	@Test
-	public void test7UpdateStudent(){
+	public void test07UpdateStudent(){
 	    log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 	    Student student = new Student();
 	    student.setStudId(1);
@@ -104,7 +104,7 @@ public class StudentMapperTest {
 	}
 
 	@Test
-	public void test8SelectStudentByAllForResutlMap(){
+	public void test08SelectStudentByAllForResutlMap(){
 	   log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 	   List<Student> list = mapper.selectStudentByAllForResutlMap();
 	   Assert.assertNotNull(list);
@@ -112,7 +112,7 @@ public class StudentMapperTest {
 	}
 
 	@Test
-	public void test9SelectStudentByAllForHashMap(){
+	public void test09SelectStudentByAllForHashMap(){
 	   log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 	   List<Map<String,Object>> list = mapper.selectStudentByAllForHashMap();
 	   Assert.assertNotNull(list);
@@ -122,5 +122,16 @@ public class StudentMapperTest {
 	       }
 	   }
 	}
+	
+	@Test
+	public void test10SelectStudentByNoAssociation() {
+	    log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+	    Student student = new Student();
+	    student.setStudId(1);
+	    Student seletedStd = mapper.selectStudentByNoAssociation(student);
+	    Assert.assertNotNull(seletedStd);
+	    log.debug(seletedStd.toString());
+	}
+
 
 }
