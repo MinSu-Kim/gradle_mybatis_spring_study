@@ -1,6 +1,7 @@
 package gradle_mybatis_spring_study.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,5 +16,11 @@ public interface StudentMapper {
     int insertStudent(Student student);
     int deleteStudent(int id);
     int updateStudent(Student student);
+
+    //ResultMap - List
+    List<Student> selectStudentByAllForResutlMap();
+
+    //ResultMap - HashMap
+    List<Map<String, Object>> selectStudentByAllForHashMap();
 
 }
