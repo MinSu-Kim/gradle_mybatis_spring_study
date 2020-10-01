@@ -84,7 +84,7 @@ public class UserPicMapperTest {
         return file;
     }
 
-    /* @Test */
+    @Test
     public void testCDeleteUserPic() {
         log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
         int res = mapper.deleteUserPic(1);
