@@ -115,14 +115,20 @@
 -->    
 
    <!-- 내포된 결과매핑(ResultMap)을 사용한 일대일 매핑 -->
-   <resultMap id="StudentAssociation" type="Student" extends="StudentResult">
-     <association property="address" resultMap="gradle_mybatis_spring_study.mapper.AddressMapper.AddressResult"/>
-   </resultMap>
+    <resultMap id="StudentAssociation" type="Student" extends="StudentResult">
+        <association property="address" resultMap="gradle_mybatis_spring_study.mapper.AddressMapper.AddressResult"/>
+    </resultMap>
     
-   <select id="selectStudentByNoAssociation" parameterType="Student" resultMap="StudentAssociation">
-     select stud_id, name, email, phone, dob, a.addr_id, street, city, state, zip, country
-       from students s join addresses a on s.addr_id=a.addr_id
-      where stud_id = #{studId} 
-   </select>
+    <select id="selectStudentByNoAssociation" parameterType="Student" resultMap="StudentAssociation">
+        select stud_id, name, email, phone, dob, a.addr_id, street, city, state, zip, country
+          from students s join addresses a on s.addr_id=a.addr_id
+         where stud_id = #{studId} 
+    </select>
+
+    <!-- enum 타입 다루기 -->
+    <insert id="insertEnumStudent" parameterType="Student">
+        insert into students(stud_id, name, email,phone, dob, gender)
+        values(#{studId}, #{name}, #{email}, #{phone}, #{dob}, #{gender})
+    </insert>
 
 </mapper>
