@@ -18,3 +18,11 @@ select stud_id, name, email, dob, phone,
 DELETE FROM students WHERE STUD_ID  = 4;
 
 SELECT * FROM user_pics;
+
+select course_id, name, description, start_date, end_date, tutor_id from courses WHERE tutor_id = 1;
+
+select course_id, name, description, start_date, end_date, tutor_id 
+  from courses 
+ WHERE name like '%Java%';
+ 
+select course_id, name, description, start_date, end_date, tutor_id from courses WHERE start_date >= '2013-02-01';
