@@ -1,5 +1,6 @@
 package gradle_mybatis_spring_study.mapper;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -89,6 +90,28 @@ public class CourseMapperTest {
         list = mapper.selectCaseCourses(map);
         Assert.assertNotNull(list);
         list.stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void test05SelectWhereCourses() {
+        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<Course> list = mapper.selectWhereCourses(map);
+        Assert.assertNotNull(list);
+        list.stream().forEach(System.out::println);
+            
+        map.put("tutorId", 1);
+        list = mapper.selectWhereCourses(map);
+        list.stream().forEach(System.out::println);
+            
+        map.put("courseName", "%Java%");
+        list = mapper.selectWhereCourses(map);
+        list.stream().forEach(System.out::println);
+            
+        map.clear();
+        map.put("endDate", new Date());
+        list = mapper.selectWhereCourses(map);
+        list.stream().forEach(System.out::println);      
     }
 
 }

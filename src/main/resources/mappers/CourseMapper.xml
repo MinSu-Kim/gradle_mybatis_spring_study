@@ -52,4 +52,38 @@
         </choose>
     </select>
 
+    <!-- 동적SQL - where 조건 -->
+    <sql id="whereSqlCDATA">
+        <where>
+            <if test="tutorId != null">   
+            <![CDATA[ 
+                and tutor_id = #{tutorId}
+            ]]>
+            </if>
+            
+            <if test="courseName != null">
+            <![CDATA[ 
+                and name like #{courseName}   
+            ]]>
+            </if>
+            
+            <if test="startDate != null"> 
+            <![CDATA[ 
+                and start_date >= #{startDate}
+            ]]>
+            </if>
+            
+            <if test="endDate != null">   
+            <![CDATA[ 
+                and end_date <= #{endDate}    
+            ]]>
+            </if>
+        </where>
+    </sql>
+    
+    <select id="selectWhereCourses" parameterType="map" resultMap="CourseResult">
+        <include refid="selectSql" />
+        <include refid="whereSqlCDATA" />
+    </select>
+
 </mapper>
