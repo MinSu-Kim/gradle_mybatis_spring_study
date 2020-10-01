@@ -36,4 +36,7 @@ public interface StudentMapper {
     /* ResultSet 처리방식의 재정의 */
     Map<Integer, String> selectStudentForMap(int studId);
 
+    /* 동적 SQL - set 조건 */
+    int updateSetStudent(Student student);
+
 }
