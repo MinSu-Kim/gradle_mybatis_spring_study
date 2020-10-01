@@ -8,3 +8,9 @@ SELECT *
 select stud_id as studId, name, email, dob, phone 
   from students 
  where stud_id=1;
+ 
+select stud_id, name, email, dob, phone, 
+               substr(phone, 1, 3) as f, 
+               substr(phone, 5, 3) as m, 
+               substr(phone, 9, 4) as l
+  from students where stud_id=1;

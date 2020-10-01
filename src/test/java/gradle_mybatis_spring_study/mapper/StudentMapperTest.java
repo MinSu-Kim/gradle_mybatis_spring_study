@@ -1,5 +1,7 @@
 package gradle_mybatis_spring_study.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.junit.Assert;
@@ -29,6 +31,25 @@ public class StudentMapperTest {
         Student selectStudent = mapper.selectStudentByNo(student);
         log.debug(selectStudent.toString());
         Assert.assertNotNull(student);
+	}
+
+	@Test
+	public void testSelectStudentByNoWithResultMap() {
+	    log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+        Student student = new Student();
+        student.setStudId(1);
+        Student selectStudent = mapper.selectStudentByNoWithResultMap(student);
+        log.debug(selectStudent.toString());
+        Assert.assertNotNull(student);
+	}
+	
+	@Test
+	public void testSelectStudentByAll() {
+	    log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+	    List<Student> list = mapper.selectStudentByAll();
+	    Assert.assertNotNull(list); 
+	    list.stream().forEach(System.out::println);
 	}
 
 }
