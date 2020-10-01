@@ -11,4 +11,9 @@ public interface StudentMapper {
     Student selectStudentByNo(Student student);
     Student selectStudentByNoWithResultMap(Student student);
     List<Student> selectStudentByAll();
+    
+    int insertStudent(Student student);
+    int deleteStudent(int id);
+    int updateStudent(Student student);
+
 }
