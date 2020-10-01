@@ -9,6 +9,7 @@
         <result property="endDate" column="end_date" />
     </resultMap>
 
+    <!-- 동적SQL - if 조건  -->
     <sql id="selectSql">
         select course_id, name, description, start_date, end_date, tutor_id from courses
     </sql>
@@ -33,6 +34,22 @@
     <select id="selectCoursesByCondition" parameterType="map" resultMap="CourseResult">
         <include refid="selectSql" />
         <include refid="whereSql" />
+    </select>
+    
+    <!-- 동적SQL - choose 조건 --> 
+    <select id="selectCaseCourses" parameterType="map" resultMap="CourseResult">
+        <include refid="selectSql"/>
+        <choose>
+            <when test="searchBy=='Tutor'">
+                where tutor_id=#{tutorId}
+            </when>
+            <when test="searchBy=='CourseName'">
+                where name like #{courseName}
+            </when>
+            <otherwise>
+                where end_date &gt;=now()
+            </otherwise>
+        </choose>
     </select>
 
 </mapper>

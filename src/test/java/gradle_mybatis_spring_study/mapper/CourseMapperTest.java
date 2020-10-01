@@ -73,4 +73,22 @@ public class CourseMapperTest {
         list.stream().forEach(System.out::println);
     }
 
+    @Test
+    public void test04SelectCaseCourses() {
+        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("searchBy", "Tutor");
+        map.put("tutorId", 1);
+        List<Course> list = mapper.selectCaseCourses(map);
+        Assert.assertNotNull(list);
+        list.stream().forEach(System.out::println);
+            
+        map.replace("searchBy", "CourseName");
+        map.remove("tutorId");
+        map.put("courseName", "%Java%");
+        list = mapper.selectCaseCourses(map);
+        Assert.assertNotNull(list);
+        list.stream().forEach(System.out::println);
+    }
+
 }
