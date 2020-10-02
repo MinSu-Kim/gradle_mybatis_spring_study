@@ -42,7 +42,7 @@ public class TutorAndCourseServiceTest {
         address.setAddrId(2);
         PhoneNumber phone = new PhoneNumber("010-2222-2222");
         
-        //1번 교수는 이미 존재
+        //1번 교수는 존재
         Tutor tutor = new Tutor(1, "mskim", "net94@naver.com", phone, address);
     
         Course course = new Course(8, "Python", "Programming", new Date(), new Date(), 4);    
@@ -58,7 +58,7 @@ public class TutorAndCourseServiceTest {
         
         Tutor tutor = new Tutor(5, "mskim", "net94@naver.com", phone, address);
     
-        //2번 과목 존재DuplicateKeyException , 해당 교수번호를가진 교수가 존재하지 않음
+        //2번 과목 존재, 해당 교수번호를가진 교수가 존재하지 않음
         Course course = new Course(2, "Python", "Programming", new Date(), new Date(), 100);
     
         service.trJoinTutorAndCourse(tutor, course);
