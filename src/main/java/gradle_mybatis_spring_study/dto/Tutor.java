@@ -1,6 +1,5 @@
 package gradle_mybatis_spring_study.dto;
 
-import java.util.Date;
 import java.util.List;
 
 public class Tutor {
