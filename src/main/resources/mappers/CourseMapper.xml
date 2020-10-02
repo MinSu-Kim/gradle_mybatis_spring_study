@@ -136,4 +136,14 @@
             </where>
     </delete>
 
+    <!-- transaction -->
+    <insert id="insertCourse" parameterType="Course">
+        INSERT INTO COURSES(COURSE_ID, NAME, DESCRIPTION, START_DATE, END_DATE, TUTOR_ID) 
+        VALUES (#{courseId}, #{name},#{description},#{startDate},#{endDate},#{tutorId}) 
+    </insert>
+    <delete id="deleteCourse" >
+        DELETE 
+          FROM COURSES
+         WHERE COURSE_ID=#{courseId}
+    </delete>
 </mapper>

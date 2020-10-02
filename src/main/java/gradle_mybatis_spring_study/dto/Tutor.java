@@ -1,13 +1,34 @@
 package gradle_mybatis_spring_study.dto;
 
+import java.util.Date;
 import java.util.List;
 
 public class Tutor {
     private int tutorId;
     private String name;
     private String email;
+    private PhoneNumber phone;
     private Address address;
     private List<Course> courses;
+
+    public Tutor() {
+        // TODO Auto-generated constructor stub
+    }
+
+    public Tutor(int tutorId, String name, String email, Address address) {
+        this.tutorId = tutorId;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+    }
+
+    public Tutor(int tutorId, String name, String email, PhoneNumber phone, Address address) {
+        this.tutorId = tutorId;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
 
     public int getTutorId() {
         return tutorId;
@@ -33,6 +54,14 @@ public class Tutor {
         this.email = email;
     }
 
+    public PhoneNumber getPhone() {
+        return phone;
+    }
+
+    public void setPhone(PhoneNumber phone) {
+        this.phone = phone;
+    }
+
     public Address getAddress() {
         return address;
     }
@@ -51,7 +80,7 @@ public class Tutor {
 
     @Override
     public String toString() {
-        return String.format("Tutor [%s, %s, %s, %s, %s]", tutorId, name, email, address, courses);
+        return String.format("Tutor [%s, %s, %s, %s, %s, %s]", tutorId, name, email, phone, address, courses);
     }
 
 }

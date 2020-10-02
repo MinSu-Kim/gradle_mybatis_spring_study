@@ -18,5 +18,9 @@ public interface CourseMapper {
     List<Course> selectCoursesForeachByTutors(Map<String, Object> map);
     int insertCourses(Map<String, Object> map);
     int deleteCourses(Map<String, Object> map);
+    
+    /* Transaction */
+    int insertCourse(Course course);
+    int deleteCourse(int courseId);
 
 }
